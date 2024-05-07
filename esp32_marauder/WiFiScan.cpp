@@ -3913,7 +3913,11 @@ void WiFiScan::eapolSnifferCallback(void* buf, wifi_promiscuous_pkt_type_t type)
         display_string.concat(" ");
       }
 
-      Serial.print(" ");
+      for(int i = 0; i<len; i++)
+      {
+        Serial.print(snifferPacket->payload[i]);
+      }
+      Serial.println("");
 
       #ifdef SCREEN_BUFFER
         if (display_obj.display_buffer->size() == 0)
@@ -4011,6 +4015,7 @@ void WiFiScan::activeEapolSnifferCallback(void* buf, wifi_promiscuous_pkt_type_t
   if (( (snifferPacket->payload[30] == 0x88 && snifferPacket->payload[31] == 0x8e)|| ( snifferPacket->payload[32] == 0x88 && snifferPacket->payload[33] == 0x8e) )){
     num_eapol++;
     Serial.println("Received EAPOL:");
+    
 
   }
 
